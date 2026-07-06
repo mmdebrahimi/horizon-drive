@@ -164,4 +164,21 @@ This experiment cannot make the effect real. It can only make the answer **unamb
 
 ---
 
-*Appendix — reproduce the numbers:* `python research_outputs/decisive_test_budget.py` (η calibration, per-phase F_QI, photon/thermal floors, integration times, Q-scaling span, thermodynamic break-even). All figures in §2 come from it; the script's assertions are the checkable bar for this design (all phases clear thermal ≥10×; Q-scaling span ≥10⁴×).*
+## 10. The analysis pipeline is validated in simulation
+
+Designing a clean experiment is not enough — you have to prove the *analysis* actually separates a real signal from an artifact *before* building hardware. So, exactly as `device_sim` validated the craft's flight controller, `decisive_test_sim.py` is a **measurement digital-twin**: it simulates the measured force on the torsion balance (QI signal + a µN-scale thermal drift + a magnetic offset + white and 1/f noise), runs a genuine AC-modulation + **lock-in** recovery (gain self-calibrated on a noiseless unit run), and asks whether the pipeline reaches the right verdict. Verified results (`python decisive_test_sim.py` → *SIM OK*):
+
+| Scenario | Recovered | Verdict |
+|---|---|---|
+| **True-QI world**, resonance-on/off | 12 µN → 24 mN → 2.4 N; **Q-scaling slope = 1.00** | correctly **DETECTED** (SNR 10⁴–10⁹) |
+| **Systematics-only** (η = 0), resonance-on/off | at the noise floor (~10 nN, random sign); **slope ≈ −0.04 (not 1)** | correctly **REJECTED** — zero false positives |
+| Systematics-only, *naive* power-on/off | thermal leaks (~1.5 µN) but **flat, slope ≈ 0** | leak exposed by Q-scaling anyway |
+| Null tests (true world) | reversed cavity **flips sign**; symmetric cavity **→ ~0** | as predicted |
+
+The twin confirms the design's core logic end-to-end: **resonance-on/off modulation keeps dumped power equal, so thermal and magnetic offsets stay unmodulated and the lock-in rejects them**, while the QI signal — present only on-resonance — survives; and even if a systematic did leak (naive power modulation), the **Q-scaling slope discriminator** catches it because no systematic tracks Q. Two independent defenses, both shown to work in noise. This does not prove the effect is real — it proves the method can tell real from artifact.
+
+---
+
+*Appendix — reproduce the numbers:*
+- `python research_outputs/decisive_test_budget.py` — the signal/systematics/noise budget (η calibration, per-phase F_QI, photon/thermal floors, integration times, Q-scaling span, thermodynamic break-even). All figures in §2 come from it; its assertions are the checkable bar (all phases clear thermal ≥10×; Q-scaling span ≥10⁴×).
+- `python research_outputs/decisive_test_sim.py` — the measurement digital-twin of §10 (torsion balance + systematics + lock-in; asserts the pipeline detects a true-QI world and rejects a systematics-only world).*
