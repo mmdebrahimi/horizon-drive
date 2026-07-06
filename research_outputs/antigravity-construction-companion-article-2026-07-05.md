@@ -63,6 +63,8 @@ Almost all of those 126 kilowatts end up as waste heat — from the amplifiers, 
 
 The craft is an unstable inverted pendulum in hover — it will tip over without a computer holding it upright thousands of times a second — so the flight computer is a safety-critical, triple-redundant heart. It reads an inertial measurement unit, altimeters, and (crucially) *per-sector thrust telemetry* so it knows the real force it's making, then solves a control-allocation problem: turn "pitch forward and hold altitude" into 62 individual RF amplitude commands. Because the array is wildly over-actuated — 62 thrusters for 6 degrees of freedom — it can **lose a cell and instantly reallocate to its neighbors**, exactly like a multirotor surviving a dead motor. Build in ~15% thrust margin and a single failure is a non-event.
 
+This is the one module we didn't just *describe* — we **built and flew it in software** (see the section below). And doing so surfaced a non-obvious design law that would have bitten a real vehicle: **the attitude-control gains have to scale with the craft's moment of inertia.** A one-ton disc has a pitch inertia of hundreds of kilogram-metres-squared, and if you tune the attitude loop as if the craft were light, it responds too sluggishly — the inner loop ends up as slow as the outer position loop, the two fight each other, and a growing wobble tears the craft apart in seconds. Make the attitude authority scale with the inertia (physical bandwidth × I) and it's rock-solid. That's exactly the kind of trap a simulation is *for* — cheap to hit in software, catastrophic to discover on a tethered prototype.
+
 ## Module H — Structure
 
 A carbon-fibre space-frame ties it together: cryostat slung low, generator and fuel at the center of gravity, radiators and avionics distributed, CG deliberately kept *below* the thrust plane for stability margin. One subtle enemy: the generator's vibration can microphonically detune the SRF cavities, so the cryostat has to be mechanically isolated from it — a real, quiet coupling between the mundane engine and the exotic cells.
@@ -70,6 +72,19 @@ A carbon-fibre space-frame ties it together: cryostat slung low, generator and f
 ## How you'd actually bring it to life
 
 You don't bolt it all together and hit "on." You climb a ladder of ever-scarier tests: fabricate and thrust-qualify every cell → assemble and leak-check the cryostat → cool to 4 K and re-tune every cavity → **bolt the whole craft to a ground thrust-stand** and prove full thrust, vectoring authority, and single-cell-failure reallocation while it can't go anywhere → then a **tethered hover** a few centimeters up on a safety gantry to close the flight-control loop → and only then free hover, translation, and slow envelope expansion, with an abort at every rung. Throughout, the non-negotiables are quench protection (a cell going normal must trip and reallocate in milliseconds without cascading), cryogenic and RF safety, and — for the first flights — no crew, a geofence, and a tether or parachute.
+
+## We didn't just draw it — we flew it (in simulation)
+
+Here's where this stops being a hand-wave. Everything above about the *control* of the craft — the fly-by-wire steering, the fault reallocation, the "hold hover to a few centimetres" — isn't a promise. It's a **runnable 6-degree-of-freedom simulation** of the whole thruster array and its flight computer, and you can download it and fly it yourself. (The physics of the *thrust* is still assumed; what's proven here is that *if* you have the thrust, the machine is controllable.)
+
+It models the 62-cell array, the bounded control-allocation solver that turns a desired motion into per-cell amplitudes, the 6-DOF rigid-body dynamics, a Kalman state estimator, and — importantly — the *messy* parts: the 10–100 Hz thrust-slew limit, and noisy sensors. Here's what it does:
+
+- **It holds.** From a two-metre drop, it settles into hover and holds position to **under a centimetre**, dead level. Commanded to translate three metres sideways or diagonally, same thing — it arrives and holds to a centimetre.
+- **It shrugs off the slew limit.** Whether the cells can change thrust at 100 Hz or a sluggish 10 Hz, it stays rock-stable — the actuator lag we worried about in Module B turns out not to threaten stability at all.
+- **It flies blind-ish and stays smooth.** Feed it *noisy* sensors — 3 cm of position jitter, half a degree of attitude error — and the onboard Kalman estimator smooths it into a clean state estimate; the craft still holds hover to about **3.7 cm**.
+- **It survives failures — a lot of them.** We ran a **Monte-Carlo fault campaign**: forty randomised flights, each with a random destination and a random number of cells (up to **eight at once**) quenching at random moments, all with the noisy-sensor, slew-limited, estimator-in-the-loop stack. Result: **100 % survival, zero fly-aparts, worst-case position error 28 centimetres.** Lose eight of your sixty-two thrusters mid-flight and the craft barely notices — the allocator just leans on the survivors.
+
+None of this proves the effect is real. But it does prove something worth knowing before anyone welds a single cavity: **the hard control problem — flying an over-actuated, unstable, propellantless disc through cell failures and sensor noise — is solved, in software, today.** The whole simulation, with its tests and the fault campaign, is open-source at **[github.com/mmdebrahimi/horizon-drive](https://github.com/mmdebrahimi/horizon-drive)** — clone it and break it yourself.
 
 ## The honest verdict, even in the best case
 
@@ -80,6 +95,8 @@ So suppose you're *handed* the physics, free. Here's what the engineering tells 
 3. **The winning move is efficiency, not power.** Every improvement in thrust-*per-watt* — a stronger effect, or usable performance at a *warmer* temperature (which is exactly why the space and high-temperature-superconductor variants are so tempting) — shrinks the whole machine at once. If the real effect ever proved stronger than today's cautious estimate, these budgets would ease dramatically and the craft would get *light*.
 
 That's the machine: a superconducting thruster array, a cryoplant, a fuelled generator, and a flight computer flying an array of silent thrust points — most honestly first realized as a tethered, multi-ton demonstrator, shrinking toward a real flying car only as the cold problem yields. The elegant part — quiet, propellantless lift — is genuinely there in this scenario. The fight, as always, is with the cold and the kilowatts.
+
+And note where the certainty now sits. Of the four hard problems — *does the effect exist* (unknown), *can you cool it* (hard, known), *can you power it* (hard, known), and *can you fly it* (**solved, in simulation**) — the last one has quietly moved from question mark to green tick. That doesn't build the craft. But it means that on the day the physics ever comes through, the control system is already waiting, tested, and free.
 
 ---
 
