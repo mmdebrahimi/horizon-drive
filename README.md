@@ -47,6 +47,19 @@ law of thermodynamics (Higgins 2015), while pushing on the vacuum needs a rest f
 | `plans/Anti_Gravity_Device_Hardware_WBS.md` | Hardware work-breakdown structure |
 | `device_sim/` | **The digital twin** — a runnable 6-DOF simulation of the thruster craft |
 
+## Reproduce everything in one command
+
+```bash
+pip install -r requirements.txt
+python verify_all.py        # ~1 min: 12 checks, exit 0 == everything reproduces
+```
+
+`verify_all.py` recomputes every headline number in the three articles + the decisive-experiment design
+from first principles (η=0.0072, 240 N/cell, 62 cells, 12 µN Phase-1 signal, 33 nN photon floor, 2.4 N at
+Q=10¹⁰), then runs all four computational artifacts — the signal/noise budget, the measurement digital-twin,
+the Phase-1 balance sizing, and a quick `device_sim` fault campaign — each of which self-asserts. The claims
+in this repository are not asserted; they are recomputed. That is the whole point.
+
 ## The digital twin (`device_sim/`)
 
 A simulation of the 62-cell superconducting thruster array + fly-by-wire flight control (physics assumed
