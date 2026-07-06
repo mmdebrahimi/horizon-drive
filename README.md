@@ -31,7 +31,8 @@ law of thermodynamics (Higgins 2015), while pushing on the vacuum needs a rest f
 | Path | What |
 |---|---|
 | `research_outputs/antigravity-medium-article-draft-2026-07-04.md` | The essay (physics, ~25 min) — is any of this real? |
-| `research_outputs/antigravity-construction-companion-article-2026-07-05.md` | The build companion (~8 min) — if it worked, what would you build? |
+| `research_outputs/antigravity-construction-companion-article-2026-07-05.md` | The build companion (~13 min) — if it worked, what would you build? |
+| `research_outputs/antigravity-cavity-chamber-deep-dive-2026-07-06.md` | Cavity-chamber deep-dive (~11 min) — the craft's most important part: QI mechanism, why Q is the lever, the 2 K-Nb vs 4 K-Nb₃Sn fork, the 50 MV/m ceiling, and the failure demons |
 | `research_outputs/antigravity-first-principles-derivation-deep-dive-2026-07-04.md` | First-principles derivations (Maxwell forced, the walls, the surviving door) |
 | `research_outputs/antigravity-full-landscape-assessment.md` | The full ~35-candidate landscape matrix |
 | `research_outputs/casimir-*`, `lentz-*`, `woodward-*`, `polarizable-*`, `qi-haisch-*`, `quantised-inertia-*`, `higgins-*`, `space-horizon-*` | Per-candidate audit memos (primary-source-grounded) |

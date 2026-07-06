@@ -6,6 +6,12 @@
 
 ---
 
+<!-- IMAGE PLACEHOLDER · source: research_outputs/images/ChatGPT Image Jul 5, 2026, 11_48_34 PM.png -->
+![Horizon-Drive craft — full conceptual assembly storyboard, eight panels from the thrust cell to the final hero view](images/ChatGPT%20Image%20Jul%205,%202026,%2011_48_34%20PM.png)
+*The whole vehicle at a glance — the thrust cell, the 62-cell underside array, the cryostat, the RF and power/thermal/control stacks, and the assembled craft on a ground test-stand and in tethered hover. (Conceptual visualization only — not construction drawings.)*
+
+---
+
 *This is the sequel nobody expects. In the main essay, we spent our time deciding whether inertia-from-the-vacuum is real physics — and landed on a careful "open, unconfirmed, but not forbidden." Here we take the leap the honest scientist doesn't get to take, and simply* assume it is. *Assume the decisive experiment comes back positive, the effect survives every control, and it strengthens as you crank up the cavity quality, just as the theory hopes. Now you're not a physicist anymore. You're an engineer with a budget, and you have to build the thing.*
 
 *What follows is the surprise waiting for anyone who tries.*
@@ -20,7 +26,7 @@ Here's the whole vehicle, subsystem by subsystem, with the honest numbers.
 
 Start from the target: a **1,000 kg craft** with enough thrust to actually fly (not just barely hover), so aim for a thrust-to-weight of 1.5 — about **14.7 kilonewtons** of force. At the calibrated performance (240 newtons from each 1-kilowatt superconducting cell), that's **62 cells drawing 62 kW of radio-frequency power.** So far, so reasonable.
 
-Then the cold bill arrives. Those cells only reach their magic quality factor if they're niobium held at **4 kelvin** — four degrees above absolute zero — and keeping something that cold costs roughly **500 watts of compressor for every single watt you pull out of the cold zone.** The cryogenics alone draw **~61 kW** and weigh **~490 kilograms.** Add it all up:
+Then the cold bill arrives. Those cells only reach their magic quality factor if the superconductor is held at **~4 kelvin** — a few degrees above absolute zero — and keeping something that cold costs roughly **500 watts of compressor for every single watt you pull out of the cold zone.** (Honest caveat, because it matters: *pure* niobium only hits Q = 10¹⁰ down at 2 K, which is even harsher; you reach 4 K only by switching to niobium-tin, Nb₃Sn, and paying for it in gradient. That fork is the whole subject of the [cavity deep-dive companion](antigravity-cavity-chamber-deep-dive-2026-07-06.md) — and either way, *cold stays the wall.*) The cryogenics alone draw **~61 kW** and weigh **~490 kilograms.** Add it all up:
 
 | Subsystem | Value |
 |---|---|
@@ -36,17 +42,39 @@ Read the dry-mass line and wince: **~1,100 kg before a single battery or drop of
 
 The heart of everything is a single superconducting cavity, and you build and *individually flight-qualify one* before you make sixty-two. It's a truncated cone of bulk niobium (the taper asymmetry is the "manufactured horizon" doing the work), formed from spun half-shells electron-beam-welded in vacuum, then put through the full particle-accelerator surface ritual: chemical polish, an 800 °C hydrogen-degassing bake, a final electropolish, and a high-pressure ultrapure-water rinse in a cleanroom. That ritual is what buys the quality factor of ten billion. Each finished cell gets an adjustable power coupler, a **piezo frequency tuner** (non-negotiable — a cavity that drifts off resonance makes *zero* thrust), and a field probe for its control loop. Then every cell is tested on a thrust stand and must hit ~240 N at 1 kW before it's allowed anywhere near the craft.
 
+<!-- IMAGE PLACEHOLDER · source: research_outputs/images/ChatGPT Image Jul 6, 2026, 12_20_36 AM.png -->
+![Thrust-cell module — front orthographic view, cutaway side section, exploded isometric assembly, plan view, and bill of materials](images/ChatGPT%20Image%20Jul%206,%202026,%2012_20_36%20AM.png)
+*Module A, the thrust cell: a ~0.12 m truncated niobium cone with the large end as the downward thrust face. The exploded view shows the RF power coupler, ceramic isolator, piezo tuner ring, and field-probe collar that make one cell work. (Conceptual — non-actionable engineering artwork.)*
+
+<!-- IMAGE PLACEHOLDER · source: research_outputs/images/ChatGPT Image Jul 5, 2026, 11_53_09 PM.png -->
+![Thrust-cell module — alternate exploded isometric assembly with full parts list](images/ChatGPT%20Image%20Jul%205,%202026,%2011_53_09%20PM.png)
+*The same cell, exploded top-to-bottom with its conceptual bill of materials — mouth ring, outer frustum shell, inner confinement liner, cavity region, coupler, isolator, tuner, cap, mounting flange, and support struts. Build and flight-qualify one of these perfectly before you make sixty-two.*
+
+> **Want the whole story of this one component?** The cavity is where the craft's only genuinely open question lives — *does shaping the vacuum with a horizon actually push?* — built out of the most mature technology on the vehicle. The [**cavity-chamber deep-dive**](antigravity-cavity-chamber-deep-dive-2026-07-06.md) covers the QI thrust mechanism and its cheap falsification test, why Q is the entire lever (F = η·P·Q/c), the 2 K-niobium-vs-4 K-Nb₃Sn material fork, the ~50 MV/m gradient ceiling, and the three failure demons — detuning, quench, and field emission — that make *keeping* a cavity working harder than building one.
+
 ## Module B — The array and how it steers
 
 Sixty-two-plus cells (build ~72 for spares) pack into a hexagonal grid on the craft's underside, grouped into at least three independently-throttled sectors. And here's the elegant part: **there are no gimbals, no moving control surfaces, nothing mechanical.** You steer entirely by *differential thrust* — dial up the RF amplitude on one side to pitch or roll, tilt a few cells tangentially for yaw, push all of them together to climb. It's fly-by-wire in the purest sense, an array of 62 silent thrust points commanded thousands of times a second. The one catch: thermal and tuner settling limit how fast real thrust can change to roughly 10–100 Hz — quick enough to fly, but the control law has to respect it.
+
+<!-- IMAGE PLACEHOLDER · source: research_outputs/images/ChatGPT Image Jul 5, 2026, 11_55_27 PM.png -->
+![Underside cell-array module — top plan view of the 62-cell honeycomb, cutaway section, exploded assembly, and cell-cluster detail](images/ChatGPT%20Image%20Jul%205,%202026,%2011_55_27%20PM.png)
+*Module B, the array: 62 thrust cells packed on a ~2.16 m honeycomb grid, grouped into six sectors, with no gimbals or moving surfaces — you steer entirely by differential thrust. (Conceptual visualization only.)*
 
 ## Module C — The RF power chain
 
 Each cell gets its own ~1 kW solid-state (GaN) amplifier, all phase-locked to one master oscillator with a commanded phase offset for steering, plus a per-cell **low-level RF loop** that continuously drives the tuner to hold the cavity exactly on resonance. None of this is speculative — it's mature accelerator technology, run every day at facilities like CERN and SLAC, just never before asked to fly.
 
+<!-- IMAGE PLACEHOLDER · source: research_outputs/images/ChatGPT Image Jul 6, 2026, 12_08_23 AM.png -->
+![RF subsystem module — RF manifold plan view, cutaway, exploded assembly, and signal/control architecture diagram](images/ChatGPT%20Image%20Jul%206,%202026,%2012_08_23%20AM.png)
+*Module C, the RF chain: per-cell solid-state amplifiers phase-locked to one master oscillator, with a low-level RF control loop per cell holding each cavity exactly on resonance. Mature accelerator technology — never before asked to fly. (Conceptual — non-actionable.)*
+
 ## Module D — The cryogenic system (engineer this the hardest)
 
 This is the mass driver, so it gets the most brutal engineering attention. The whole cell array shares one vacuum vessel wrapped in multilayer insulation, with an actively-cooled 40–80 K radiation shield intercepting heat *before* it reaches the precious 4 K stage — because every stray watt at 4 K costs 500 at the wall plug. Distributed pulse-tube cryocoolers (or a small central helium refrigerator) carry the ~124 W heat load. And the entire design philosophy of the craft reduces to one obsession: *minimize the 4 K heat leak* — low-conductivity cell supports, thermally-intercepted couplers, optimized insulation. **The single most valuable improvement anyone could make to this whole vehicle isn't more thrust — it's needing less power, because less power shrinks the RF *and* the cryogenics *and* the mass, all at once.**
+
+<!-- IMAGE PLACEHOLDER · source: research_outputs/images/ChatGPT Image Jul 5, 2026, 11_59_41 PM.png -->
+![Cryostat module — full section cutaway, thermal shell stack showing warm-to-cold heat flow, and exploded assembly](images/ChatGPT%20Image%20Jul%205,%202026,%2011_59_41%20PM.png)
+*Module D, the cryostat — the mass driver of the whole craft. A 300 K outer shell, a gold MLI blanket, an actively-cooled 40–80 K radiation shield intercepting heat before it reaches the 4 K cavity stage, and copper thermal straps carrying the load out. Every stray watt at 4 K costs ~500 at the wall plug. (Conceptual visualization only.)*
 
 ## Module E — Power (the endurance wall)
 
@@ -64,6 +92,10 @@ Almost all of those 126 kilowatts end up as waste heat — from the amplifiers, 
 The craft is an unstable inverted pendulum in hover — it will tip over without a computer holding it upright thousands of times a second — so the flight computer is a safety-critical, triple-redundant heart. It reads an inertial measurement unit, altimeters, and (crucially) *per-sector thrust telemetry* so it knows the real force it's making, then solves a control-allocation problem: turn "pitch forward and hold altitude" into 62 individual RF amplitude commands. Because the array is wildly over-actuated — 62 thrusters for 6 degrees of freedom — it can **lose a cell and instantly reallocate to its neighbors**, exactly like a multirotor surviving a dead motor. Build in ~15% thrust margin and a single failure is a non-event.
 
 This is the one module we didn't just *describe* — we **built and flew it in software** (see the section below). And doing so surfaced a non-obvious design law that would have bitten a real vehicle: **the attitude-control gains have to scale with the craft's moment of inertia.** A one-ton disc has a pitch inertia of hundreds of kilogram-metres-squared, and if you tune the attitude loop as if the craft were light, it responds too sluggishly — the inner loop ends up as slow as the outer position loop, the two fight each other, and a growing wobble tears the craft apart in seconds. Make the attitude authority scale with the inertia (physical bandwidth × I) and it's rock-solid. That's exactly the kind of trap a simulation is *for* — cheap to hit in software, catastrophic to discover on a tethered prototype.
+
+<!-- IMAGE PLACEHOLDER · source: research_outputs/images/ChatGPT Image Jul 6, 2026, 12_15_31 AM.png -->
+![Power / thermal / control stack module — full side elevation, exploded assembly, and control/fault-tolerance architecture](images/ChatGPT%20Image%20Jul%206,%202026,%2012_15_31%20AM.png)
+*Modules E–G integrated into one stack: the ~126 kW turbo-generator and fuel tank, the HVDC power ring, the cryocooler manifold and radiator, and the triple-redundant flight computers running state estimation, voting, and control allocation to the 62-cell array. (Conceptual — non-actionable engineering artwork.)*
 
 ## Module H — Structure
 
