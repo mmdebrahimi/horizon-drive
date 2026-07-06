@@ -38,6 +38,8 @@ law of thermodynamics (Higgins 2015), while pushing on the vacuum needs a rest f
 | `research_outputs/casimir-*`, `lentz-*`, `woodward-*`, `polarizable-*`, `qi-haisch-*`, `quantised-inertia-*`, `higgins-*`, `space-horizon-*` | Per-candidate audit memos (primary-source-grounded) |
 | `research_outputs/antigravity-working-device-build-instructions-2026-07-04.md` | The working-craft build (modules A–H), assuming the effect is real |
 | `research_outputs/antigravity-device-engineering-roadmap-2026-07-04.md` | The decisive-experiment test-rig roadmap |
+| `research_outputs/antigravity-decisive-experiment-design-2026-07-06.md` | **The definitive falsification experiment** — full design: Q-scaling discriminator, null-test matrix, go/no-go decision tree, 3-phase escalation |
+| `research_outputs/decisive_test_budget.py` | Runnable signal/systematics/noise budget for the decisive experiment (proves it's systematics-limited, not sensitivity-limited) |
 | `research_outputs/antigravity-device-drawing-guide-LLM-spec-2026-07-05.md` | An LLM prompt spec to generate a step-by-step visual build guide |
 | `plans/Anti_Gravity_Device_Hardware_WBS.md` | Hardware work-breakdown structure |
 | `device_sim/` | **The digital twin** — a runnable 6-DOF simulation of the thruster craft |
