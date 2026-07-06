@@ -50,10 +50,12 @@ closed loop — with per-cell thrust-slew dynamics, noisy sensors, a Kalman/comp
 and control allocation that reallocates around failed cells.
 
 ```bash
-pip install numpy scipy pytest
-python -m pytest -q device_sim                     # 15 tests
+pip install -r requirements.txt                    # numpy, scipy, pytest
+python -m pytest -q device_sim                     # 15 tests, all green
 python -c "from device_sim.montecarlo import campaign; print(campaign().summary())"
 ```
+
+*Last verified 2026-07-06: 15/15 tests pass; the Monte-Carlo campaign reports 100.0% survival (40/40), 0 diverged, worst-case 0.278 m, up to 8 cells quenched.*
 
 **Headline results:**
 - Reproduces the verified budget exactly: 240 N/cell, 62 cells, ~126 kW, ~490 kg cryocoolers, ~1,108 kg dry.
@@ -76,3 +78,9 @@ before hardware.
 
 *Built as a research + engineering exercise. Suspend disbelief for the physics premise; the arithmetic is
 honest either way.*
+
+## License
+
+Code (`device_sim/`) is released under the **MIT License** (see `LICENSE`) — clone it, run it, break it,
+build on it. The research essays under `research_outputs/` are shared for reading and discussion; please
+credit the author and link back if you quote or reuse them.

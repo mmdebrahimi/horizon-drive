@@ -289,3 +289,14 @@ For readers who want the primary literature (all open-access unless noted):
 - **The equivalence-principle bound:** MICROSCOPE collaboration, final results, Phys. Rev. Lett. **129**, 121102 (2022).
 - **The thermodynamic vise (read this before believing any thruster claim):** A. J. Higgins, *"Reconciling a Reactionless Propulsive Drive with the First Law of Thermodynamics,"* arXiv:1506.00494 (2015).
 - **The momentum jaw:** S. Carroll, quoted in *Discover* (2014) — the quantum vacuum has no rest frame to push against; discussed in E. Siegel, *"How Physics Falls Apart If The EmDrive Works,"* Forbes/Starts With A Bang (2016).
+
+---
+
+## Companion pieces
+
+This essay is the *physics* — is any of it real? Two companions take the next step:
+
+- **[How You'd Actually Build One: The Engineering Blueprint for a Horizon-Drive Craft](antigravity-construction-companion-article-2026-07-05.md)** — *if* the effect were real, what does the machine look like? (Spoiler: the exotic part is trivial; the whole fight is refrigeration.) Includes a runnable 6-DOF flight simulation that survives losing 8 of 62 thrusters mid-flight.
+- **[The Cavity Chamber: Where the Anti-Gravity Actually Happens](antigravity-cavity-chamber-deep-dive-2026-07-06.md)** — a deep dive into the one component that is at once the most speculative physics and the most mature engineering on the whole craft.
+
+The open-source simulation lives at **[github.com/mmdebrahimi/horizon-drive](https://github.com/mmdebrahimi/horizon-drive)** — clone it and fly it yourself.
