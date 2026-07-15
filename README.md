@@ -45,6 +45,8 @@ law of thermodynamics (Higgins 2015), while pushing on the vacuum needs a rest f
 | `research_outputs/phase1_balance_sizing.py` | Sizes the Phase-1 torsion balance (0.90 mm W fibre) and proves it resolves the 12 µN signal with ~7,900× margin |
 | `research_outputs/antigravity-copper-cell-fabrication-2026-07-06.md` | **Hands-on fabrication guide** for the buildable copper thrust cell (the testable inertia-modifying element) — machinist BOM, step-by-step, VNA Q-gate, safety; copper tier only |
 | `research_outputs/copper_cavity_fab_calc.py` | Grounds the fab guide: TM010 frequency (1.84 GHz), room-temp copper Q₀ (~27k), skin depth, wall heat |
+| `research_outputs/copper-cavity-machinist-spec-2026-07-15.md` | **Machinist spec sheet** (HD-CU-CAV-001) — build-ready dimensioned drawing set for the copper cavity: body + end cap + tuner, tolerances, Ra≤0.4µm mirror finish, BOM, inspection/acceptance |
+| `research_outputs/copper_cavity_machinist_check.py` | Verifies the spec-sheet dimensions (frequency in-band, bore tolerance → tuner range, skin depth → finish call-out) |
 | `research_outputs/antigravity-device-drawing-guide-LLM-spec-2026-07-05.md` | An LLM prompt spec to generate a step-by-step visual build guide |
 | `plans/Anti_Gravity_Device_Hardware_WBS.md` | Hardware work-breakdown structure |
 | `device_sim/` | **The digital twin** — a runnable 6-DOF simulation of the thruster craft |

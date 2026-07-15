@@ -51,6 +51,7 @@ scripts = [
     ("decisive_test_sim.py", "measurement digital-twin"),
     ("phase1_balance_sizing.py", "Phase-1 balance sizing"),
     ("copper_cavity_fab_calc.py", "copper thrust-cell fab calc"),
+    ("copper_cavity_machinist_check.py", "machinist-spec dimension check"),
 ]
 for fname, desc in scripts:
     path = os.path.join(RO, fname)
