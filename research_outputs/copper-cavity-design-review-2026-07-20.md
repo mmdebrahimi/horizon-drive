@@ -27,7 +27,9 @@
 
 ## Optimizations — ranked by impact
 
-### Tier 0 — the strategic fork (design-authority call, NOT mine)
+### Tier 0 — the strategic fork ✅ RESOLVED 2026-07-20 → **keep the cone**
+> **Resolved in `cavity-geometry-fork-resolution-2026-07-20.md`:** under the QI/MiHsC theory the horizon-drive is calibrated to, the thrust law F = (P·Q·L/c)·(1/D_s − 1/D_b) makes a **symmetric pillbox produce exactly zero thrust** — the asymmetry IS the mechanism. Keep the frustum; add a **pillbox as a cheap null-control** (must read zero → any nonzero reading is a systematic). The text below is retained for context.
+
 **Is the truncated-cone taper mechanistically required?**
 - If the effect is a **McCulloch-QI / EmDrive-family** mechanism, the frustum *asymmetry is the mechanism* → **keep the cone.**
 - If it's a **shape-agnostic scalar inertia-modifier** (F = η·P·Q/c), the cone buys nothing → a **cylindrical pillbox (Ø125 mm)** is higher-Q and *trivially* mirror-finished (a straight bore laps; a 120 mm blind cone is the hardest possible finish).

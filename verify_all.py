@@ -54,6 +54,7 @@ scripts = [
     ("copper_cavity_machinist_check.py", "machinist-spec dimension check"),
     ("cavity_design_review_calcs.py", "design-review EM calcs"),
     ("cavity_material_comparison.py", "material efficiency ladder"),
+    ("cavity_geometry_factor_check.py", "taper-vs-pillbox geometry factor"),
 ]
 for fname, desc in scripts:
     path = os.path.join(RO, fname)
