@@ -57,6 +57,7 @@ scripts = [
     ("cavity_geometry_factor_check.py", "taper-vs-pillbox geometry factor"),
     ("apparatus_artifact_budget.py", "cross-subsystem artifact-vs-signal budget"),
     ("snr_vs_quality.py", "signal-vs-environment SNR vs Q"),
+    ("build_timeline_gantt.py", "build-timeline phase/gate math"),
 ]
 for fname, desc in scripts:
     path = os.path.join(RO, fname)
