@@ -52,6 +52,8 @@ scripts = [
     ("phase1_balance_sizing.py", "Phase-1 balance sizing"),
     ("copper_cavity_fab_calc.py", "copper thrust-cell fab calc"),
     ("copper_cavity_machinist_check.py", "machinist-spec dimension check"),
+    ("cavity_design_review_calcs.py", "design-review EM calcs"),
+    ("cavity_material_comparison.py", "material efficiency ladder"),
 ]
 for fname, desc in scripts:
     path = os.path.join(RO, fname)
